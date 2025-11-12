@@ -30,7 +30,7 @@ function Navbar({unit, setUnit}: NavbarProps) {
                             >°C Celsius</a></li>
 
                         <li><a  id='btn_farenheit' 
-                                onClick={() => setUnit('farenheit')}
+                                onClick={() => setUnit('fahrenheit')}
                                 className={`${ unit === 'farenheit' ? 'text-accent' :'' }`}
                             >°F Farenheit</a></li>
                     </ul>

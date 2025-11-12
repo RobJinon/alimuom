@@ -12,6 +12,38 @@ function Searchbar({setCity, setCoordinates}: SearchbarProps) {
     const [showDropdown, setShowDropdown] = useState(false)
 
     useEffect(() => {
+        const fetchCityFromCoordinates = async () => {
+            if (!navigator.geolocation) return;
+
+            navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+                const { latitude, longitude } = pos.coords;
+
+                setCoordinates({ lat: latitude, lon: longitude });
+
+                try {
+                const result = await fetch(
+                    `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}&count=1&language=en&format=json`
+                );
+                const data = await result.json();
+
+                if (data.results && data.results.length > 0) {
+                    const city = data.results[0];
+                    setCity(`${city.name}, ${city.country}`);
+                    setQuery(`${city.name}, ${city.country}`);
+                }
+                } catch (error) {
+                console.error("Error fetching city from coordinates:", error);
+                }
+            },
+            (err) => console.warn("Geolocation denied or unavailable:", err)
+            );
+        };
+
+        fetchCityFromCoordinates();
+    }, [setCity, setCoordinates]);
+
+    useEffect(() => {
         const fetchCities = async () => {
             if (query.length < 2) {
                 setSuggestions([])
