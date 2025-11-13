@@ -75,7 +75,7 @@ function Searchbar({setCity, setCoordinates}: SearchbarProps) {
 
     return (
         <div className="flex justify-center">
-            <div className="dropdown w-full max-w-sm">
+            <div className="dropdown min-w-sm max-w-lg p-5">
                 <div tabIndex={0} role="button" className="w-full">
                     <label className="input input-bordered flex items-center gap-2 w-full">
                     <MagnifyingGlassIcon className="size-4 opacity-70" />
