@@ -24,7 +24,7 @@ function App() {
   }, [coordinates])
 
   return (
-    <div className='min-w-screen max-w-screen min-h-screen flex flex-col align-center md:p-10 md:px-20 p-2 '>
+    <div className='min-w-screen max-w-screen min-h-screen flex flex-col align-center md:p-10 p-2'>
       <Navbar unit={unit} setUnit={setUnit} />
       <Searchbar setCity={setCity} setCoordinates={setCoordinates}/>
       <WeatherDetails city={city} unit={unit} coordinates={coordinates}/>
